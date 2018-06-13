@@ -7,18 +7,19 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(),InitFragment {
 
-    var mAuth = FirebaseAuth.getInstance()
+    var mAuth : FirebaseAuth ? = null  //FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
+        mAuth = FirebaseAuth.getInstance()
     }
 
 
     override fun onStart() {
         super.onStart()
-        val firebaseUser = mAuth.currentUser
-        if (firebaseUser != null) finish() else startFragment(LoginFragment())
+        val firebaseUser = mAuth!!.currentUser
+        if (firebaseUser != null) finish() else startFragment(LoginFragment.newInstance())
     }
 
     override fun startFragment(fragment: Fragment) {

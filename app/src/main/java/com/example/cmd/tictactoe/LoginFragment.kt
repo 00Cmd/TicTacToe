@@ -9,10 +9,14 @@ import com.example.cmd.tictactoe.R.layout.login_layout
 
 class LoginFragment : Fragment() {
 
+    companion object {
+        fun newInstance() : LoginFragment {
+            return LoginFragment()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = super.onCreateView(inflater, container, savedInstanceState)
-        inflater.inflate(login_layout,container,false)
-        return v
+        return inflater.inflate(login_layout,container,false)
     }
 
 }
