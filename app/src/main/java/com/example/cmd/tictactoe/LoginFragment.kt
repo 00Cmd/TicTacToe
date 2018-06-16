@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.example.cmd.tictactoe.R.layout.login_layout
 import com.google.firebase.auth.FirebaseAuth
@@ -17,8 +16,6 @@ import kotlinx.android.synthetic.main.login_layout.*
 class LoginFragment : Fragment() {
 
     private var mAuth : FirebaseAuth? = null
-    private val userLogin : EditText? = null
-    private val userPass : EditText? = null
 
 
     companion object {
@@ -30,10 +27,15 @@ class LoginFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(login_layout,container,false)
         mAuth = FirebaseAuth.getInstance()
-        val btn : Button ? = v.findViewById(R.id.loginLoginBtn)
-//        loginLoginBtn.setOnClickListener({loginUser()})
-        btn?.setOnClickListener({loginUser()})
+        val loginBtn : Button ? = v.findViewById(R.id.loginLoginBtn)
+        val registerBtn : Button ? = v.findViewById(R.id.loginRegisterBtn)
+        loginBtn?.setOnClickListener { loginUser() }
+        registerBtn?.setOnClickListener { redirect() }
         return v
+    }
+
+    private fun redirect() {
+        startActivity(Intent(activity,RegisterActivity::class.java))
     }
 
     private fun loginUser() {
@@ -52,4 +54,3 @@ class LoginFragment : Fragment() {
     }
 
 
-}

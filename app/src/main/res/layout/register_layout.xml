@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/username"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/userPass"
+        app:layout_constraintStart_toStartOf="@+id/userPass" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:id="@+id/userPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginStart="18dp"
+        android:hint="@string/password"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/userPassConfirm"
+        app:layout_constraintStart_toStartOf="@+id/userPassConfirm" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:id="@+id/userPassConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="180dp"
+        android:hint="@string/password_again"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/registerLoginBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/registerLoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:text="@string/login"
+        app:layout_constraintBaseline_toBaselineOf="@+id/registerRegisterBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/registerRegisterBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/register"
+        app:layout_constraintStart_toEndOf="@+id/registerLoginBtn"
+        app:layout_constraintTop_toBottomOf="@+id/userPassConfirm" />
+
+</android.support.constraint.ConstraintLayout>

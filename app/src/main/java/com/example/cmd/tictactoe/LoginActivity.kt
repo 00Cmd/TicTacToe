@@ -24,6 +24,8 @@ class LoginActivity : AppCompatActivity(),InitFragment {
 
     override fun startFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .add(R.id.loginContainer,fragment).commit()
+                .replace(R.id.loginContainer,fragment)
+                .addToBackStack("loginFragment")
+                .commit()
     }
 }
