@@ -13,10 +13,7 @@ import com.example.cmd.tictactoe.R.layout.login_layout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login_layout.*
 
-class LoginFragment : Fragment() {
-
-    private var mAuth : FirebaseAuth? = null
-
+class LoginFragment : Fragment(),References.AuthRef {
 
     companion object {
         fun newInstance() : LoginFragment {
@@ -26,7 +23,6 @@ class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(login_layout,container,false)
-        mAuth = FirebaseAuth.getInstance()
         val loginBtn : Button ? = v.findViewById(R.id.loginLoginBtn)
         val registerBtn : Button ? = v.findViewById(R.id.loginRegisterBtn)
         loginBtn?.setOnClickListener { loginUser() }
@@ -42,14 +38,10 @@ class LoginFragment : Fragment() {
         val username = usernameLogin!!.text.toString()
         val userPassword = passwordLogin!!.text.toString()
             if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(userPassword)) {
-                mAuth?.signInWithEmailAndPassword(username, userPassword)?.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        startActivity(Intent(activity, ProfileActivity::class.java))
-                    }
-                }
-            } else {
-                Toast.makeText(activity, "Username or password can't be empty", Toast.LENGTH_SHORT).show()
-            }
+                getAuthInstance().signInWithEmailAndPassword(username, userPassword).addOnCompleteListener { task ->
+                    if (task.isSuccessful) { startActivity(Intent(activity, ProfileActivity::class.java)) }
+                }.addOnFailureListener { exception -> Toast.makeText(activity, "exception : ${ exception.localizedMessage }", Toast.LENGTH_LONG).show() }
+            } else Toast.makeText(activity, "Username or password can't be empty", Toast.LENGTH_SHORT).show()
         }
     }
 

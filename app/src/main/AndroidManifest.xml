@@ -19,6 +19,7 @@
 
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".UserSettingsActivity" />
     </application>
 
 </manifest>

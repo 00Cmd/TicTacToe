@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,9 +17,9 @@ import kotlinx.android.synthetic.main.register_layout.*
 class RegisterFragment : Fragment() {
 
     val TAG : String = "RegistrationFragment"
-    var mAuth : FirebaseAuth ? = null
-    var databaseInstance : FirebaseDatabase ? = null
-    var databaseRef : DatabaseReference ? = null
+    private var mAuth : FirebaseAuth ? = null
+    private var databaseInstance : FirebaseDatabase ? = null
+    private var databaseRef : DatabaseReference ? = null
 
     companion object {
         fun getInstance() : RegisterFragment {
@@ -53,21 +51,22 @@ class RegisterFragment : Fragment() {
         if (!TextUtils.isEmpty(username) &&
                 !TextUtils.isEmpty(password) && !TextUtils.isEmpty(passConf)) {
             if(TextUtils.equals(password,passConf)) {
-                mAuth?.createUserWithEmailAndPassword(username, password)?.addOnCompleteListener {
-                    task ->
-                    if(task.isSuccessful) {
+                if (password.length > 6) {
+                    mAuth!!.createUserWithEmailAndPassword(username, password).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
 
-                        val userId = mAuth!!.currentUser!!.providerId
-                        val currentUserDb = databaseRef!!.child(userId)
-                        currentUserDb.child("username").setValue(username)
-                        currentUserDb.child("password").setValue(password)
-                        startActivity(Intent(activity,ProfileActivity::class.java))
+                            val userId = mAuth!!.currentUser!!.providerId
+                            val currentUserDb = databaseRef!!.child(userId)
+                            currentUserDb.child("username").setValue(username)
+                            currentUserDb.child("password").setValue(password)
+                            startActivity(Intent(activity, UserSettingsActivity::class.java))
 
 
-
-                    } else Toast.makeText(activity,"Something went wrong",Toast.LENGTH_SHORT).show()
-                }
+                        } else Toast.makeText(activity, "Something went wrong. Is the email valid?", Toast.LENGTH_SHORT).show()
+                    }
+                } else Toast.makeText(activity,"Password must be at least 6 characters long.",Toast.LENGTH_SHORT).show()
             } else Toast.makeText(activity,"Password did not match .",Toast.LENGTH_SHORT).show()
         } else Toast.makeText(activity,"Please fill all fields",Toast.LENGTH_SHORT).show()
+
     }
 }
