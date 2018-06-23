@@ -1,6 +1,7 @@
 package com.example.cmd.tictactoe
 
 class User() {
+    //TODO: Change to K,V pairs and create a util class that holds all the users
     var email: String = ""
     var firstname:  String = ""
     var lastname: String  = ""

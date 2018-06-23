@@ -19,7 +19,6 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
     lateinit var userImage: CircleImageView
     lateinit var btnSave: Button
     private val mRef = getDatabaseInstance().getReference("users")
-    private val uId = getAuthInstance().currentUser!!.uid
 
 
 
