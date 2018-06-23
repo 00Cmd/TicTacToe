@@ -6,14 +6,14 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 
 class UserSettingsActivity : AppCompatActivity(),InitFragment {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
         startFragment(SettingsFragment.getInstance())
     }
     override fun startFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .add(R.id.userSettingsContainer,fragment,fragment.tag)
+                .add(R.id.userSettingsContainer,fragment)
                 .addToBackStack("userSettingsFragment").commit()
     }
 }

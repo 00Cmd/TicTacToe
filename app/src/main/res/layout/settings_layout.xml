@@ -31,34 +31,6 @@
         tools:layout_editor_absoluteY="405dp" />
 
 
-    <EditText
-        android:layout_gravity="center"
-        android:id="@+id/settingsUserEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="267dp" />
-
-
-    <EditText
-        android:layout_gravity="center"
-        android:id="@+id/settingsUserEmailConf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/confirm_email"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="331dp" />
-
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="2dp"
-        android:background="#000000"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="240dp" />
-
         <EditText
             android:hint="@string/firstname"
             android:layout_gravity="center"
@@ -76,6 +48,38 @@
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="71dp"
             tools:layout_editor_absoluteY="267dp" />
+
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="240dp" />
+
+
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/settingsUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="71dp"
+            tools:layout_editor_absoluteY="267dp"
+            android:hint="@string/email"/>
+
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/settingsUserEmailConf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_email"
+            tools:layout_editor_absoluteX="71dp"
+            tools:layout_editor_absoluteY="331dp" />
 
         <TextView
             android:layout_marginBottom="10dp"
@@ -108,13 +112,14 @@
 
 
         <Button
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:text="@string/save"
-            android:background="@drawable/buttonstyle"
+            android:id="@+id/settingsSaveBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/buttonstyle"
+            android:text="@string/save" />
 
 
 
