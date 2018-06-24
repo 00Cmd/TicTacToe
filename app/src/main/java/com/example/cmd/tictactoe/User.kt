@@ -21,4 +21,5 @@ class User() {
         this.image = image
         this.userId = userId
     }
+
 }

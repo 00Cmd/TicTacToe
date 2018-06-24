@@ -19,6 +19,7 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
     lateinit var userImage: CircleImageView
     lateinit var btnSave: Button
     private val mRef = getDatabaseInstance().getReference("users")
+    private val uId = getAuthInstance().currentUser!!.uid
 
 
 
@@ -39,8 +40,9 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
 
     private fun saveUserSettings() {
 
-        val mUser = User()
-        mUser.userId = uId
+
+        val mUser : User = UserHolder.getInstance().getUser(uId)!!
+
 
         //Name validation
         val userName = settingsUserName!!.text.toString()

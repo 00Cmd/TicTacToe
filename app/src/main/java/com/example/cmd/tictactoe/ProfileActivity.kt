@@ -30,6 +30,7 @@ class ProfileActivity : AppCompatActivity(),InitFragment,References.AuthRef {
         when(item?.itemId) {
             settings -> startActivity(Intent(this,UserSettingsActivity::class.java))
             logout -> getAuthInstance().signOut()
+
         }
         return false
     }

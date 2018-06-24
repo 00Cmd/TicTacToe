@@ -56,6 +56,7 @@ class RegisterFragment : Fragment(),References.AuthRef,References.DbInstance {
                             val currentUserDb = databaseRef.child(userId)
                             val mUser = User(username,"","",password,"",userId)
                             currentUserDb.setValue(mUser)
+                            UserHolder.getInstance().addUser(mUser)
                             startActivity(Intent(activity, UserSettingsActivity::class.java))
                         } else Toast.makeText(activity, "Something went wrong. Is the email valid?", Toast.LENGTH_SHORT).show()
                     }
