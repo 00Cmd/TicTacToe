@@ -41,7 +41,8 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
     private fun saveUserSettings() {
 
 
-        val mUser : User = UserHolder.getInstance().getUser(uId)!!
+        val mUserHolder : UserHolder = UserHolder.instance
+        val mUser = mUserHolder.getUser(uId)
 
 
         //Name validation
@@ -99,8 +100,7 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
     }
 
     private fun initDataChangeListener(user : User): ValueEventListener {
-        val userId = getAuthInstance().currentUser!!.uid
-        val dbRef = mRef.child(userId)
+        val dbRef = mRef.child(uId)
         return object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(activity,"error", Toast.LENGTH_SHORT).show()

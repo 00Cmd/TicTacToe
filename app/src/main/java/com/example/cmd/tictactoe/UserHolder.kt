@@ -1,37 +1,46 @@
 package com.example.cmd.tictactoe
 
+import java.util.ArrayList
+
 class UserHolder {
-    lateinit var mUsers : ArrayList<User>
+
+    private var mList: ArrayList<User>? = null
 
     init {
         initList()
     }
 
+
     companion object {
-        fun getInstance() : UserHolder {
-            return UserHolder()
+        private var mHolder: UserHolder? = null
+
+        val instance: UserHolder
+            get() {
+                if (mHolder == null) {
+                    mHolder = UserHolder()
+                }
+                return mHolder!!
+            }
+    }
+
+    private fun initList() {
+        if (mList == null) {
+            mList = ArrayList()
         }
     }
 
-    //TODO: Find out how init works
 
-    public fun addUser(user:User) = mUsers.add(user)
 
-    public fun getUser(userId : String) : User {
-        val user : User = mUsers.find { it.userId == userId }!!
-        if (user == null) {
-            throw NullPointerException()
-        } else {
-            return user
-        }
-    }
 
-    private fun initList() : ArrayList<User> {
-        if (!::mUsers.isInitialized) {
-            mUsers = ArrayList<User>()
-        }
-        return mUsers
-    }
+    //TODO: Create a buffer that checks and adds users to database :)
+
+    public fun addUser(user:User) = mList!!.add(user)
+
+    public fun getUser(userId : String) : User = mList!!.find { it.userId == userId }!!
+
+
+
+
 
 
 

@@ -55,10 +55,14 @@ class RegisterFragment : Fragment(),References.AuthRef,References.DbInstance {
                             val userId = authInstance.currentUser!!.uid
                             val currentUserDb = databaseRef.child(userId)
                             val mUser = User(username,"","",password,"",userId)
+                            //TODO: Start a new Thread for user registration and -
+                            //TODO: - add a loading Dialog
                             currentUserDb.setValue(mUser)
-                            UserHolder.getInstance().addUser(mUser)
+                            val holder = UserHolder.instance
+                            holder.addUser(mUser)
+                            Toast.makeText(activity,"Added ${mUser.userId}",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(activity, UserSettingsActivity::class.java))
-                        } else Toast.makeText(activity, "Something went wrong. Is the email valid?", Toast.LENGTH_SHORT).show()
+                        } else throw Exception() //Toast.makeText(activity, "Something went wrong. Is the email valid?", Toast.LENGTH_SHORT).show()
                     }
                 } else Toast.makeText(activity,"Password must be at least 6 characters long.",Toast.LENGTH_SHORT).show()
             } else Toast.makeText(activity,"Password did not match .",Toast.LENGTH_SHORT).show()
