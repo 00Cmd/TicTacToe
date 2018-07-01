@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
+import com.example.cmd.tictactoe.room.User
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.register_layout.*
 
 class RegisterFragment : Fragment(),References.AuthRef,References.DbInstance {
@@ -54,12 +53,12 @@ class RegisterFragment : Fragment(),References.AuthRef,References.DbInstance {
                         if (task.isSuccessful) {
                             val userId = authInstance.currentUser!!.uid
                             val currentUserDb = databaseRef.child(userId)
-                            val mUser = User(username,"","",password,"",userId)
+                            val mUser = User(username, "", "", password, "", userId)
                             //TODO: Start a new Thread for user registration and -
                             //TODO: - add a loading Dialog
                             currentUserDb.setValue(mUser)
-                            val holder = UserHolder.instance
-                            holder.addUser(mUser)
+//                            val holder = UserHolder
+//                            holder.addUser(mUser)
                             Toast.makeText(activity,"Added ${mUser.userId}",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(activity, UserSettingsActivity::class.java))
                         } else throw Exception() //Toast.makeText(activity, "Something went wrong. Is the email valid?", Toast.LENGTH_SHORT).show()

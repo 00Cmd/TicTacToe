@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity(),InitFragment {
         if (firebaseUser != null) startActivity(Intent(this,ProfileActivity::class.java)) else startFragment(LoginFragment.newInstance())
     }
 
+    //TODO: Architecture components, had a lib which replaces fragmentTransaction .
     override fun startFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.loginContainer,fragment)

@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -22,6 +25,8 @@ android {
     }
 }
 
+
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -37,6 +42,20 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.1'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //Dagger 2
+    implementation 'com.google.dagger:dagger:2.14.1'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
+
+    //Dagger 2 Android
+    kapt "com.google.dagger:dagger-android-processor:2.14.1"
+    implementation "com.google.dagger:dagger-android:2.14.1"
+    implementation "com.google.dagger:dagger-android-support:2.14.1"
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
+
 
     //Test
     testImplementation 'junit:junit:4.12'

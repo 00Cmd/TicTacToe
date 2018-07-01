@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import com.example.cmd.tictactoe.room.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -35,14 +36,21 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
         val v = inflater.inflate(R.layout.settings_layout,container,false)
         initialize(v)
         btnSave.setOnClickListener { saveUserSettings() }
+        userImage.setOnClickListener { changeUserImage() }
         return v
+    }
+
+    private fun changeUserImage() {
+//        val i = Intent()
     }
 
     private fun saveUserSettings() {
 
 
-        val mUserHolder : UserHolder = UserHolder.instance
-        val mUser = mUserHolder.getUser(uId)
+//        val mUserHolder = UserHolder
+        val mUserRef = mRef.child(uId)
+//        mUserRef.addValueEventListener()
+        val mUser = getUserFromDb()
 
 
         //Name validation
@@ -107,9 +115,27 @@ class SettingsFragment : Fragment(),References.AuthRef,References.DbInstance {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                dbRef.setValue(user)
+                if (p0.exists()) {
+                    dbRef.setValue(user)
+                }
             }
         }
+    }
+
+    private fun getUserFromDb() : User {
+        val dbRef = mRef.child(uId)
+        var mUser : User? = null
+        val dataListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                mUser = p0.getValue(User::class.java)
+            }
+        }
+       dbRef.addListenerForSingleValueEvent(dataListener)
+        return mUser!!
     }
 }
 
