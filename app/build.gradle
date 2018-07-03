@@ -2,9 +2,14 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
 
 
 android {
@@ -23,11 +28,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
 
 dependencies {
+    def daggerVersion = '2.14.1'
+
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
@@ -42,16 +54,19 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.1'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-    //Dagger 2
-    implementation 'com.google.dagger:dagger:2.14.1'
-    kapt 'com.google.dagger:dagger-compiler:2.14.1'
 
-    //Dagger 2 Android
-    kapt "com.google.dagger:dagger-android-processor:2.14.1"
-    kapt "com.google.dagger:dagger-compiler:2.14.1"
-    implementation "com.google.dagger:dagger:2.14.1"
-    implementation "com.google.dagger:dagger-android:2.14.1"
-    implementation "com.google.dagger:dagger-android-support:2.14.1"
+    //Dagger 2
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+
+    //LifeCycle
+    implementation "android.arch.lifecycle:runtime:1.1.1"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
 
     //Room
     implementation "android.arch.persistence.room:runtime:1.1.1"
