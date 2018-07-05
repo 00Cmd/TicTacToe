@@ -1,13 +1,14 @@
 package com.example.cmd.tictactoe.injection
 
 import android.app.Application
+import com.example.cmd.tictactoe.BlogApp
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AndroidInjectionModule::class, AppModule::class, ActivityModule::class))
+@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (ActivityModule::class)])
 interface AppComponent {
     @Component.Builder
     interface Builder {

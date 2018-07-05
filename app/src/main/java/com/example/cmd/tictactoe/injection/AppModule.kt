@@ -2,22 +2,32 @@ package com.example.cmd.tictactoe.injection
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import com.example.cmd.tictactoe.data_layer.room.UserDAO
-import com.example.cmd.tictactoe.data_layer.room.UserDataBase
+import com.example.cmd.tictactoe.data_layer.room.user.UserDAO
+import com.example.cmd.tictactoe.data_layer.room.user.UserDataBase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-internal class AppModule {
+class AppModule {
+
+//    @Provides
+//    @Singleton
+//    fun provideContext(app : Application) : Application{
+//        return app
+//    }
 
     @Singleton
     @Provides
-    fun providesUserDb(app: Application) : UserDataBase {
-        return Room.databaseBuilder(app,UserDataBase::class.java,"user.db").build()
+    fun provideDatabase(app : Application) : UserDataBase {
+        return Room.databaseBuilder(app,
+                UserDataBase::class.java, "user.db")
+                .build()
     }
 
     @Singleton
     @Provides
-    fun provideUserDao(db : UserDataBase) : UserDAO = db.userDao()
+    fun prodivdeUserDao(db: UserDataBase) : UserDAO {
+        return db.userDao()
+    }
 }

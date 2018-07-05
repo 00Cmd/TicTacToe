@@ -1,7 +1,8 @@
-package com.example.cmd.tictactoe.injection
+package com.example.cmd.tictactoe
 
 import android.app.Activity
 import android.app.Application
+import com.example.cmd.tictactoe.injection.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
